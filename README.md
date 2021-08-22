@@ -1,10 +1,10 @@
 # schoology
 
-Format requests to the [Schoology API](https://developers.schoology.com/api-documentation/authentication#toc-item-1)
+Authenticate & send requests to the [Schoology API](https://developers.schoology.com/api-documentation/authentication)
 
 ### Installation
 
-`npm i schoology -S`
+`npm i schoology-api`
 
 ### Usage
 
@@ -12,8 +12,8 @@ To consume the Schoology API, you'll need an API key and secret. Find these by l
 
 1. Instantiate the client like this:
 
-   ```
-   import SchoologyAPI from 'schooology'
+   ```js
+   import SchoologyAPI from 'schoology-api'
 
    const client = new SchoologyAPI(key, secret,  site_base?, api_host?)
    ```
@@ -28,7 +28,7 @@ To consume the Schoology API, you'll need an API key and secret. Find these by l
    
    *The SchoologyAPI instance stores the response token for subsequent requests.*
 
-3. Complete Oauth flow
+3. Complete OAuth flow
 
    This means redirecting the user to login at their schoology site where they will be prompted to approve access to their schoology account. Use SchoologyAPI to generate the correct redirect URL like this:
 
@@ -44,4 +44,4 @@ To consume the Schoology API, you'll need an API key and secret. Find these by l
    
 5. Make requests!
 
-   `const userInfo = await client.makeRequest('get', '/app-user-info')`
+   `const userInfo = await client.fetch('https://api.schoology.com/v1/users/me')`
