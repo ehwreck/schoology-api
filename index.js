@@ -28,6 +28,7 @@ class SchoologyAPI {
         this.client_secret = client_secret;
         this.site_base = site_base;
         this.api_base = `${(api_host ?? ((site_base.indexOf('schoologytest') !== -1) ? SCHOOLOGYTEST_API_HOST : SCHOOLOGY_API_HOST))}/v1`;
+        this.redirectLoop = IS_BROWSER;
     }
     getAuthHeaderComponents(signatureMethod = 'PLAINTEXT', token = '') {
         const nonce = v4();
@@ -100,28 +101,47 @@ class SchoologyAPI {
     async easyFetch(url, init = {}) {
         const that = this;
         const { fetch, getPlaintextAuthHeader } = that;
-        let res = await fetch(url, {
-            ...init,
-            "headers": {
-                "Authorization": getPlaintextAuthHeader.call(that)
-            },
-            "redirect": "manual"
-        });
-        let checkRes = async () => {
-            if (res.status.toString().indexOf("30") == 0 && res.headers.has("location")) {
-                res = await fetch(res.headers.get("location"), {
+        if (!that.redirectLoop) {
+            let res = await fetch(url, {
+                ...init,
+                "headers": {
+                    "Authorization": getPlaintextAuthHeader.call(that)
+                },
+                "redirect": "manual"
+            });
+            let checkRes = async () => {
+                if (res.status.toString().indexOf("30") == 0 && res.headers.has("location")) {
+                    res = await fetch(res.headers.get("location"), {
+                        ...init,
+                        "headers": {
+                            "Authorization": getPlaintextAuthHeader.call(that)
+                        },
+                        "redirect": "manual"
+                    });
+                    return checkRes();
+                } else {
+                    return await res.json();
+                }
+            };
+            return checkRes();
+        } else {
+            let res;
+            let tryFetch = async (cUrl) => {
+                res = await fetch(cUrl, {
                     ...init,
                     "headers": {
                         "Authorization": getPlaintextAuthHeader.call(that)
                     },
-                    "redirect": "manual"
+                    "redirect": "follow"
                 });
-                return checkRes();
-            } else {
-                return await res.json();
-            }
-        };
-        return checkRes();
+                if (res.status == 401 && await res.text() == "Duplicate timestamp/nonce combination, possible replay attack.  Request rejected." && res.url != url) {
+                    return tryFetch(res.url);
+                } else {
+                    return await res.json();
+                }
+            };
+            return tryFetch(url);
+        }
     }
 }
 module.exports = { SchoologyAPI };
