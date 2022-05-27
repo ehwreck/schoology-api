@@ -20,6 +20,8 @@
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
         "incremental": true,
-        "allowUnreachableCode": false
+        "allowUnreachableCode": false,
+        "declaration": true,
+        "declarationMap": true
     },
 }
