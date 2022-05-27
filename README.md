@@ -4,7 +4,7 @@ Authenticate & send requests to the [Schoology API](https://developers.schoology
 
 ### Installation
 
-`npm i schoology-api`
+`npm i github:hieyou1/schoology-api`
 
 ### Usage
 
@@ -25,8 +25,8 @@ To consume the Schoology API, you'll need an API key and secret. Find these by l
 2. Obtain a request token
 
    `await client.getRequestToken()`
-   
-   *The SchoologyAPI instance stores the response token for subsequent requests.*
+
+   _The SchoologyAPI instance stores the response token for subsequent requests._
 
 3. Complete OAuth flow
 
@@ -40,8 +40,8 @@ To consume the Schoology API, you'll need an API key and secret. Find these by l
 
    `await client.getAccessToken()`
 
-   *The SchoologyAPI instance stores the response token for subsequent requests.*
-   
+   _The SchoologyAPI instance stores the response token for subsequent requests._
+
 5. Make requests!
 
    `const userInfo = await client.fetch('https://api.schoology.com/v1/users/me')`

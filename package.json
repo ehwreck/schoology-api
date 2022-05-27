@@ -1,8 +1,8 @@
 {
     "name": "schoology-api",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Format requests to the Schoology API",
-    "main": "index.js",
+    "main": "dist/index.js",
     "scripts": {},
     "repository": "github:hieyou1/schoology-api",
     "author": "Joseph Beuckman & hieyou1",
