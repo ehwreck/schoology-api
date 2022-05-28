@@ -44,7 +44,7 @@ export class SchoologyAPI {
     oauth_token: string
     oauth_token_secret: string
     redirectLoop: boolean;
-    fetch: typeof fetch;
+    fetch: (url: any, init: any) => any;
 
     constructor(client_key: string, client_secret: string, site_base = DEFAULT_SITE_BASE, api_host: string = null) {
         if (IS_BROWSER) {
@@ -135,7 +135,7 @@ export class SchoologyAPI {
         return token;
     }
 
-    async easyFetch(url: RequestInfo, init = {}) {
+    async easyFetch(url: string, init = {}) {
         const that = this;
         const { fetch, getPlaintextAuthHeader } = that;
         if (!that.redirectLoop) {

@@ -7,14 +7,17 @@
         // For testing purposes...
         const Express = require("express");
         const app = Express();
+        let port;
         app.get("/", (req, res) => {
             if (req.query.oauth_token == schoology.oauth_token) {
                 res.status(200).type("text").send("Logged in");
                 resolve();
-            } else res.status(400).send();
+            } else
+                res.redirect(schoology.site_base + "/oauth/authorize?oauth_token=" + encodeURIComponent(schoology.oauth_token) + "&oauth_callback=" + encodeURIComponent(`http://localhost:${port}/`));
         });
         let listener = app.listen(0, () => {
-            console.log(schoology.getConnectURL(`http://localhost:${listener.address().port}`));
+            port = listener.address().port;
+            console.log("http://localhost:" + port);
         });
     });
     await schoology.getAccessToken({

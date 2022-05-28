@@ -19,7 +19,7 @@ export declare class SchoologyAPI {
     oauth_token: string;
     oauth_token_secret: string;
     redirectLoop: boolean;
-    fetch: typeof fetch;
+    fetch: (url: any, init: any) => any;
     constructor(client_key: string, client_secret: string, site_base?: string, api_host?: string);
     getAuthHeaderComponents(signatureMethod?: SigMethod, token?: string): FullToken;
     getUnsignedAuthHeader(): string;
@@ -29,7 +29,7 @@ export declare class SchoologyAPI {
     getRequestToken(): Promise<Token>;
     getConnectURL(returnUrl: string): string;
     getAccessToken(requestToken: any): Promise<string>;
-    easyFetch(url: RequestInfo, init?: {}): Promise<any>;
+    easyFetch(url: string, init?: {}): Promise<any>;
 }
 export {};
 //# sourceMappingURL=index.d.ts.map
