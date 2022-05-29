@@ -157,7 +157,7 @@ export class SchoologyAPI {
                     });
                     return checkRes();
                 } else {
-                    return await res.json();
+                    return await res.text();
                 }
             };
             return checkRes();
@@ -174,7 +174,7 @@ export class SchoologyAPI {
                 if (res.status == 401 && await res.text() == "Duplicate timestamp/nonce combination, possible replay attack.  Request rejected." && res.url != url) {
                     return tryFetch(res.url);
                 } else {
-                    return await res.json();
+                    return await res.text();
                 }
             };
             return tryFetch(url);
