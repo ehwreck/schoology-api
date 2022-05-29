@@ -119,7 +119,7 @@ class SchoologyAPI {
                         return checkRes();
                     }
                     else {
-                        return yield res.json();
+                        return yield res.text();
                     }
                 });
                 return checkRes();
@@ -134,7 +134,7 @@ class SchoologyAPI {
                         return tryFetch(res.url);
                     }
                     else {
-                        return yield res.json();
+                        return yield res.text();
                     }
                 });
                 return tryFetch(url);
