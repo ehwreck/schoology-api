@@ -1,5 +1,5 @@
-declare type SigMethod = 'HMAC-SHA1' | 'PLAINTEXT';
-declare type FullToken = {
+type SigMethod = 'HMAC-SHA1' | 'PLAINTEXT';
+type FullToken = {
     oauth_consumer_key: string;
     oauth_nonce: string;
     oauth_signature_method: SigMethod;
@@ -7,7 +7,7 @@ declare type FullToken = {
     oauth_token: string;
     oauth_version: '1.0';
 };
-declare type Token = {
+type Token = {
     oauth_token: string;
     oauth_token_secret: string;
 };
