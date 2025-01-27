@@ -120,7 +120,7 @@ export class SchoologyAPI {
     }
 
     getConnectURL(returnUrl: string): string {
-        return `${this.site_base}/oauth/authorize?oauth_token=${this.oauth_token}&return_url=${returnUrl}`;
+        return `${this.site_base}/oauth/authorize?oauth_token=${this.oauth_token}&oauth_callback=${returnUrl}`;
     }
 
     async getAccessToken(requestToken: any): Promise<string> {
