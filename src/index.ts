@@ -136,17 +136,19 @@ export class SchoologyAPI {
     }
 
     async getUserId(): Promise<string> {
-        let res = await (await this.fetch(this.api_base + '/app-user-info', {
+        let res = await this.fetch(this.api_base + '/app-user-info', {
             headers: {
                 "Authorization": this.getPlaintextAuthHeader()
             }
-        })).text();
+        });
+
+        const rawResponse = await res.text();
 
         if(!res.ok){
           throw new Error(`Failed to fetch user data: ${res.statusText}`);
         }
 
-        const jsonResponse = JSON.parse(res);
+        const jsonResponse = JSON.parse(rawResponse);
         return jsonResponse.api_uid;
     }
 
