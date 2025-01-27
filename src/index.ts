@@ -124,15 +124,13 @@ export class SchoologyAPI {
     }
 
     async getAccessToken(requestToken: any): Promise<string> {
-        this.setToken(requestToken);
         let res = await (await this.fetch(this.api_base + '/oauth/access_token', {
             headers: {
                 "Authorization": this.getPlaintextAuthHeader()
             }
         })).text();
-        const token = qsParse(res);
-        this.setToken(token);
-        return token;
+        const access_token = qsParse(res);
+        return access_token;
     }
 
     async easyFetch(url: string, init = {}) {

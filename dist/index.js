@@ -92,15 +92,13 @@ class SchoologyAPI {
     }
     getAccessToken(requestToken) {
         return __awaiter(this, void 0, void 0, function* () {
-            this.setToken(requestToken);
             let res = yield (yield this.fetch(this.api_base + '/oauth/access_token', {
                 headers: {
                     "Authorization": this.getPlaintextAuthHeader()
                 }
             })).text();
-            const token = qsParse(res);
-            this.setToken(token);
-            return token;
+            const access_token = qsParse(res);
+            return access_token;
         });
     }
     easyFetch(url_1) {
