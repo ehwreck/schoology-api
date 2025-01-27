@@ -133,6 +133,15 @@ export class SchoologyAPI {
         return access_token;
     }
 
+    async getUserData(): Promise<string> {
+        let res = await (await this.fetch(this.api_base + '/users/me', {
+            headers: {
+                "Authorization": this.getPlaintextAuthHeader()
+            }
+        })).text();
+        return res;
+    }
+
     async easyFetch(url: string, init = {}) {
         const that = this;
         const { fetch, getPlaintextAuthHeader } = that;

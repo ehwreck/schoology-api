@@ -101,6 +101,16 @@ class SchoologyAPI {
             return access_token;
         });
     }
+    getUserData() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let res = yield (yield this.fetch(this.api_base + '/users/me', {
+                headers: {
+                    "Authorization": this.getPlaintextAuthHeader()
+                }
+            })).text();
+            return res;
+        });
+    }
     easyFetch(url_1) {
         return __awaiter(this, arguments, void 0, function* (url, init = {}) {
             const that = this;

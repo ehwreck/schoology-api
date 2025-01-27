@@ -29,6 +29,7 @@ export declare class SchoologyAPI {
     getRequestToken(): Promise<Token>;
     getConnectURL(returnUrl: string): string;
     getAccessToken(requestToken: any): Promise<string>;
+    getUserData(): Promise<string>;
     easyFetch(url: string, init?: {}): Promise<any>;
 }
 export {};
