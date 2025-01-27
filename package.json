@@ -4,8 +4,8 @@
     "description": "Format requests to the Schoology API",
     "main": "dist/index.js",
     "scripts": {},
-    "repository": "github:hieyou1/schoology-api",
-    "author": "Joseph Beuckman & hieyou1",
+    "repository": "github:ehwreck/schoology-api",
+    "author": "Erick Trevino",
     "license": "MIT",
     "dependencies": {
         "create-hmac": "^1.1.7",
