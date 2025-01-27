@@ -1,5 +1,6 @@
 import { v4 } from "uuid";
 import { isBrowser as IS_BROWSER } from "is-in-browser";
+import { json } from "stream/consumers";
 const qsParse = (search: string): any => {
     return Object.fromEntries(new URLSearchParams(search).entries());
 };
@@ -134,8 +135,23 @@ export class SchoologyAPI {
         return token;
     }
 
-    async getUserData(): Promise<string> {
+    async getUserId(): Promise<string> {
         let res = await (await this.fetch(this.api_base + '/app-user-info', {
+            headers: {
+                "Authorization": this.getPlaintextAuthHeader()
+            }
+        })).text();
+
+        if(!res.ok){
+          throw new Error(`Failed to fetch user data: ${res.statusText}`);
+        }
+
+        const jsonResponse = JSON.parse(res);
+        return jsonResponse.api_uid;
+    }
+
+    async getUserData(id: string): Promise<string> {
+        let res = await (await this.fetch(this.api_base + `/users/${id}`, {
             headers: {
                 "Authorization": this.getPlaintextAuthHeader()
             }

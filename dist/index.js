@@ -102,9 +102,23 @@ class SchoologyAPI {
             return token;
         });
     }
-    getUserData() {
+    getUserId() {
         return __awaiter(this, void 0, void 0, function* () {
             let res = yield (yield this.fetch(this.api_base + '/app-user-info', {
+                headers: {
+                    "Authorization": this.getPlaintextAuthHeader()
+                }
+            })).text();
+            if (!res.ok) {
+                throw new Error(`Failed to fetch user data: ${res.statusText}`);
+            }
+            const jsonResponse = JSON.parse(res);
+            return jsonResponse.api_uid;
+        });
+    }
+    getUserData(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let res = yield (yield this.fetch(this.api_base + `/users/${id}`, {
                 headers: {
                     "Authorization": this.getPlaintextAuthHeader()
                 }
