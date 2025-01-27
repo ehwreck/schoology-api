@@ -103,11 +103,11 @@ class SchoologyAPI {
     }
     getUserData() {
         return __awaiter(this, void 0, void 0, function* () {
-            let res = yield (yield this.fetch(this.api_base + '/users/me', {
+            let res = yield this.fetch(this.api_base + '/users/me', {
                 headers: {
                     "Authorization": this.getPlaintextAuthHeader()
                 }
-            })).text();
+            });
             return res;
         });
     }
