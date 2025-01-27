@@ -4,7 +4,7 @@ Authenticate & send requests to the [Schoology API](https://developers.schoology
 
 ### Installation
 
-`npm i github:hieyou1/schoology-api`
+`npm i github:ehwreck/schoology-api`
 
 ### Usage
 
