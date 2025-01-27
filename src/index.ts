@@ -129,8 +129,9 @@ export class SchoologyAPI {
                 "Authorization": this.getPlaintextAuthHeader()
             }
         })).text();
-        const access_token = qsParse(res);
-        return access_token;
+        const token = qsParse(res);
+        this.setToken(token)
+        return token;
     }
 
     async getUserData(): Promise<string> {
