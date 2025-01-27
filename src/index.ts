@@ -134,7 +134,7 @@ export class SchoologyAPI {
     }
 
     async getUserData(): Promise<string> {
-        let res = await this.fetch(this.api_base + '/users/me', {
+        let res = await this.fetch(this.api_base + '/app-user-info', {
             headers: {
                 "Authorization": this.getPlaintextAuthHeader()
             }

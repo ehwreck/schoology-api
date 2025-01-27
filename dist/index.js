@@ -103,7 +103,7 @@ class SchoologyAPI {
     }
     getUserData() {
         return __awaiter(this, void 0, void 0, function* () {
-            let res = yield this.fetch(this.api_base + '/users/me', {
+            let res = yield this.fetch(this.api_base + '/app-user-info', {
                 headers: {
                     "Authorization": this.getPlaintextAuthHeader()
                 }
