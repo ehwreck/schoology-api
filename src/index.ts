@@ -124,7 +124,7 @@ export class SchoologyAPI {
         return `${this.site_base}/oauth/authorize?oauth_token=${this.oauth_token}&oauth_callback=${returnUrl}`;
     }
 
-    async getAccessToken(requestToken: any): Promise<string> {
+    async getAccessToken(): Promise<string> {
         let res = await (await this.fetch(this.api_base + '/oauth/access_token', {
             headers: {
                 "Authorization": this.getPlaintextAuthHeader()
@@ -158,7 +158,7 @@ export class SchoologyAPI {
                 "Authorization": this.getPlaintextAuthHeader()
             }
         })).text();
-        return res;
+        return JSON.parse(res);
     }
 
     async easyFetch(url: string, init = {}) {

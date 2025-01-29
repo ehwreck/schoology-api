@@ -90,7 +90,7 @@ class SchoologyAPI {
     getConnectURL(returnUrl) {
         return `${this.site_base}/oauth/authorize?oauth_token=${this.oauth_token}&oauth_callback=${returnUrl}`;
     }
-    getAccessToken(requestToken) {
+    getAccessToken() {
         return __awaiter(this, void 0, void 0, function* () {
             let res = yield (yield this.fetch(this.api_base + '/oauth/access_token', {
                 headers: {
@@ -124,7 +124,7 @@ class SchoologyAPI {
                     "Authorization": this.getPlaintextAuthHeader()
                 }
             })).text();
-            return res;
+            return JSON.parse(res);
         });
     }
     easyFetch(url_1) {
